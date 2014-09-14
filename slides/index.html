@@ -52,16 +52,6 @@
                         </p>
 					</section>
 
-<!--                    <pre><code data-trim class="cs">
-private static void WriteIndicator(int index, ConsoleColor color)
-{
-    Console.ForegroundColor = color;
-    Console.SetCursorPosition(index % _width, _top + (index / _width));
-    Console.Write(".");
-    Console.ResetColor();
-}
-                    </code></pre>-->
-
                     <section id="transitions">
                         <h2>Transition Styles</h2>
                         <p>
@@ -127,45 +117,140 @@ private static void WriteIndicator(int index, ConsoleColor color)
                             <li><a href="https://groups.google.com/forum/#!forum/dddcqrs">ddd/cqrs forum</a></li>
                         </ul>
                     </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h2>BBOM</h2>
-                    </section>
-                    <section>
-                        <section>
-                            <h2>BBOM Architecure</h2>
-                        </section>
-                    </section>
 
                     <section>
-                        <section>
-                            <h2>BBOM Implementation</h2>
+                        <h2>Slides are on GitHub</h2>
 
-                            IoC / DI as a code smell
-                        </section>
-                    </section>
-
-                    <section>
-                        <section>
-                            <h2>Mediator</h2>
-                        </section>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/kijanawoodard/NSBCon-NYC-2014/">github.com/kijanawoodard/NSBCon-NYC-2014/</a>
+                            </li>
+                        </ul>
                     </section>
                 </section>
 
                 <section>
                     <section>
-                        <h2>Domain Salvation</h2>
+                        <h2>Big Ball of Mud</h2>
+                        Our journey begins
+                        <aside class="notes">
+                            understand the problem space<br />
+                            the cure has to be better than the disease<br />
+                            too often people iterate to a solution that is worse than the original problem<br />
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>BBOM Architecure</h2>
+                        <figure>
+                            <img src="img/DependencyGraph.png" />
+                            <figcaption>
+                                -
+                                <a href="http://thedailywtf.com/">
+                                    thedailywtf.com
+                                </a>
+                                <cite>
+                                    <a href="http://thedailywtf.com/Comments/The-Enterprise-Dependency.aspx">
+                                        Comment On The Enterprise Dependency
+                                    </a>
+                                </cite>
+                            </figcaption>
+                        </figure>
+
+
+                    </section>
+
+                    <section>
+                        <h2>BBOM Implementation</h2>
+
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    ...
+
+    public OrderController(
+        IOrderRepository orders,
+        IBillingService billing,
+        IShippingService shipping)
+    {
+        _orders = orders;
+        _billing = billing;
+        _shipping = shipping;
+    }
+
+    public HttpStatusCode Post(Order order)
+    {
+        _orders.Save(order.OrderDetails);
+        _billing.Charge(order.BillingDetails);
+        _shipping.Ship(order.ShippingDetails);
+
+        return HttpStatusCode.OK;
+    }
+}
+                        </code></pre>
+
+                        <aside class="notes">
+                            IoC / DI as a code smell<br />
+                            this code hides the complexity<br />
+                            error handling?<br/>
+                            do what? log?<br />
+                            effectively orchestrating the order process<br />
+                            and the billing service depends on order repository to update order status<br />
+                            and the customer service depends on the shipping service to grant free shipping for high value customers<br />
+                            violates OCP - bbom takes shape
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Compensations</h2>
+
+                        <ul>
+                            <li class="fragment">Change control committee</li>
+                            <li class="fragment">Source control committee</li>
+                        </ul>
+
+                        <aside class="notes">
+                            worked at a company that required 17 signatures to deploy anything<br />
+                            the worst is if someone takes that seriously - bottleneck<br />
+                            everyone must get approval from SCM committee before _committing_ code<br />
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Mediator</h2>
+
+                        <ul>
+                            <li>
+                                <a href="http://kijanawoodard.com/introducing-nimbus">kijanawoodard.com/introducing-nimbus</a>
+                            </li>
+                            <li>
+                                <a href="http://lostechies.com/jimmybogard/2014/09/09/tackling-cross-cutting-concerns-with-a-mediator-pipeline/">lostechies.com/jimmybogard/2014/09/09/tackling-cross-cutting-concerns-with-a-mediator-pipeline/</a>
+                            </li>
+                        </ul>
+
+                        <aside class="notes">
+                            this talk is not about the mediator pattern<br />
+                            but NSB will act as our mediator<br />
+                        </aside>
                     </section>
                     <section>
                         <h2>Events FTW</h2>
                         Decouple through events rather than IoC
-
+                    </section>
+                    <section>
+                        <h2>Why Events?</h2>
                         <ul>
-                            <li>SRP</li>
+                            <li>Single Responsibility</li>
+                            <li>Open Closed Principle</li>
+                            <li>ISP</li>
+                            <li>DIP</li>
                             <li>Encapsulation</li>
                         </ul>
+
+                        <aside class="notes">
+                            twist your mind to see Liskov<br />
+                        </aside>
                     </section>
                     <section>
                         <h2>It's almost as if...</h2>
