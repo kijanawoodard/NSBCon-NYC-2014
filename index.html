@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Advanced NServiceBus Deployment - NSBCon NYC 2014</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -43,24 +43,282 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<section>
+                        <h1>Advanced NServiceBus Deployment</h1>
+                        <br />
+                        <h3>NSBCon NYC 2014</h3>
+                        <p>
+                            <small><a href="http://kijanawoodard.com">Kijana Woodard</a> / <a href="http://twitter.com/kijanawoodard">@kijanawoodard</a></small>
+                        </p>
+					</section>
+
+<!--                    <pre><code data-trim class="cs">
+private static void WriteIndicator(int index, ConsoleColor color)
+{
+    Console.ForegroundColor = color;
+    Console.SetCursorPosition(index % _width, _top + (index / _width));
+    Console.Write(".");
+    Console.ResetColor();
+}
+                    </code></pre>-->
+
+                    <section id="transitions">
+                        <h2>Transition Styles</h2>
+                        <p>
+                            You can select from different transitions, like: <br>
+                            <a href="?transition=slide#/transitions">Slide</a> -
+                            <a href="?transition=cube#/transitions">Cube</a> -
+                            <a href="?transition=page#/transitions">Page</a> -
+                            <a href="?transition=concave#/transitions">Concave</a> -
+                            <a href="?transition=zoom#/transitions">Zoom</a> -
+                            <a href="?transition=linear#/transitions">Linear</a> -
+                            <a href="?transition=fade#/transitions">Fade</a> -
+                            <a href="?transition=none#/transitions">None</a> -
+                            <a href="?#/transitions">Default</a>
+                        </p>
+                    </section>
+
+                    <section id="themes">
+                        <h2>Themes</h2>
+                        <p>
+                            Reveal.js comes with a few themes built in: <br>
+                            <a href="?#/themes">Default</a> -
+                            <a href="?theme=sky#/themes">Sky</a> -
+                            <a href="?theme=beige#/themes">Beige</a> -
+                            <a href="?theme=simple#/themes">Simple</a> -
+                            <a href="?theme=serif#/themes">Serif</a> -
+                            <a href="?theme=night#/themes">Night</a> <br>
+                            <a href="?theme=moon#/themes">Moon</a> -
+                            <a href="?theme=solarized#/themes">Solarized</a>
+                        </p>
+                        <p>
+                            <small>
+                                * Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
+                            </small>
+                        </p>
+                    </section>
 				</section>
 
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+                <section>
+                    <section>
+                        <h2>Background</h2>
+                        <ul>
+                            <li>Professional develop since 1996</li>
+                            <li>.net since 1.0</li>
+                            <li>Independent contractor since 2010</li>
+                        </ul>
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+                        <aside class="notes">
+                            for pay since 1996<br />
+                            been lucky to find contracts with nservicebus and ravendb
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Around the web</h2>
+
+                        <ul>
+                            <li><a href="http://kijanawoodard.com">kijanawoodard.com</a></li>
+                            <li><a href="https://twitter.com/kijanawoodard">twitter.com/kijanawoodard</a></li>
+                            <li><a href="https://github.com/kijanawoodard">github.com/kijanawoodard</a></li>
+                            <li><a href="https://www.linkedin.com/in/kijanawoodard">linkedin.com/in/kijanawoodard</a></li>
+                            <li style="margin-top: 50px;"><a href="https://groups.google.com/forum/#!forum/particularsoftware">particular forum</a></li>
+                            <li><a href="https://groups.google.com/forum/#!forum/ravendb">ravendb forum</a></li>
+                            <li><a href="https://groups.google.com/forum/#!forum/dddcqrs">ddd/cqrs forum</a></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>BBOM</h2>
+                    </section>
+                    <section>
+                        <section>
+                            <h2>BBOM Architecure</h2>
+                        </section>
+                    </section>
+
+                    <section>
+                        <section>
+                            <h2>BBOM Implementation</h2>
+
+                            IoC / DI as a code smell
+                        </section>
+                    </section>
+
+                    <section>
+                        <section>
+                            <h2>Mediator</h2>
+                        </section>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Domain Salvation</h2>
+                    </section>
+                    <section>
+                        <h2>Events FTW</h2>
+                        Decouple through events rather than IoC
+
+                        <ul>
+                            <li>SRP</li>
+                            <li>Encapsulation</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>It's almost as if...</h2>
+
+                        <figure>
+                            <blockquote cite="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">
+                                OOP to me means only messaging,
+                                local retention and protection and hiding of state-process,
+                                and extreme late-binding of all things.
+                            </blockquote>
+                            <figcaption>Alan Kay - 2003</figcaption>
+                        </figure>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Friction</h2>
+
+                        <ul>
+                            <li>
+                                More moving parts
+                                <ul>
+                                    <li>Endpoint assemblies</li>
+                                    <li>Message Conventions</li>
+                                    <li>Serialization Format</li>
+                                </ul>
+                            </li>
+
+                            <li>Harder to deploy</li>
+                            <li>Decreased Legibility</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Combat Friction</h2>
+
+                        <ul>
+                            <li>Nuget packages?</li>
+                            <li>Custom project templates?</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Bus Stop</h2>
+
+                        Show Bus Stop code with conventions as a class
+                        What else can we do with this technique?
+
+                    </section>
+                    <section>
+                        <h2>Separate Endpoints from Handlers</h2>
+
+                        Create an endpoint project and reuse for handlers
+                        Creating endpoints becomes a deployment concern
+                        Show code sample
+                        Create an endpoint for development
+                        How granular?
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Automate Automate Automate</h2>
+
+                        Won’t it be difficult to deploy?
+                        Can be as simple as powershell scripts
+                        Won’t it be difficult to maintain?
+                        Use conventions to make life easier
+                        How do we know what’s going on?
+                        Discuss platform tools
+
+                    </section>
+                    <section>
+                        <h2>Payoff</h2>
+
+                        What does this setup afford us?
+                        OPS redeployment of endpoints
+                        Visibility into deployed environment
+                        Repeatability
+                        Faster / Smaller iterations
+                        Confidence
+
+
+                    </section>
+                    <section>
+                        <h2>OPS control</h2>
+                    </section>
+                    <section>
+                        <h2>Service Insight</h2>
+
+                        Further automation
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>What about Commands?</h2>
+
+                        The normal way – through a web endpoint
+                        If you put the command on the bus?
+                        Async issues in the ui
+                        If you put the command handler in the web project?
+                        Have to duplicate in an endpoint for direct access
+                        More projects
+
+                    </section>
+                    <section>
+                        <h2>What if you proxy?</h2>
+                        Proxy the web requests to rest handlers in the endpoints
+                        Downside?
+                        Latency + fallacies of distributed computing
+                        Are the downsides worth it?
+                        Discuss
+                        Show Code
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Future exploration</h2>
+                    </section>
+
+                    <section>
+                        <h2>What about queries?</h2>
+                        Could proxy work again?
+                        Could ANI help?
+
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>THE END</h1>
+                    </section>
+
+                    <section>
+                        <h2>Advanced NServiceBus Deployment</h2>
+                        <h3>Questions?</h3>
+
+                        <ul>
+                            <li><a href="https://github.com/kijanawoodard/NSBConf-2014-NYC/">slides @ github.com/kijanawoodard/NSBConf-2014-NYC/</a></li>
+                            <li><a href="http://kijanawoodard.com">kijanawoodard.com</a></li>
+                            <li><a href="https://twitter.com/kijanawoodard">twitter.com/kijanawoodard</a></li>
+
+                            <li><a href="http://www.ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/">ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/</a></li>
+                            <li><a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">Alan Kay on OO</a></li>
+                            <li><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></li>
+                        </ul>
+                    </section>
+                </section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
@@ -152,41 +410,6 @@
 						</section>
 						```
 					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?#/themes">Default</a> -
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> <br>
-						<a href="?theme=moon#/themes">Moon</a> -
-						<a href="?theme=solarized#/themes">Solarized</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
 				</section>
 
 				<section>
@@ -318,7 +541,7 @@ function linkify( selector ) {
 				<section>
 					<h2>Spectacular image!</h2>
 					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
+						<img width="320" height="299" src="http://s3.ambazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
 					</a>
 				</section>
 
@@ -348,10 +571,7 @@ function linkify( selector ) {
 					</ul>
 				</section>
 
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
+
 
 			</div>
 
@@ -371,7 +591,7 @@ function linkify( selector ) {
 				center: true,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'slide' || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
