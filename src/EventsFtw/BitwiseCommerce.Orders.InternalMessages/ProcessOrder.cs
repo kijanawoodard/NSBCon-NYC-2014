@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BitwiseCommerce.Orders.InternalMessages
+﻿namespace BitwiseCommerce.Orders.InternalMessages
 {
     public class ProcessOrder
     {

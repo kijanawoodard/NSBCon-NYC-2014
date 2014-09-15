@@ -11,6 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Orders.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Orders.InternalMessages", "BitwiseCommerce.Orders.InternalMessages\BitwiseCommerce.Orders.InternalMessages.csproj", "{FEA6A35C-9D69-409D-990F-6CE6C0B9ADE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Billing.Contracts", "BitwiseCommerce.Billing.Contracts\BitwiseCommerce.Billing.Contracts.csproj", "{1920E538-EEFE-47D7-896E-E934EE3E0190}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Billing.InternalMessages", "BitwiseCommerce.Billing.InternalMessages\BitwiseCommerce.Billing.InternalMessages.csproj", "{7EB2D79A-8A99-40D3-AFD3-77C7FF1253BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Billing.Endpoint", "BitwiseCommerce.Billing.Endpoint\BitwiseCommerce.Billing.Endpoint.csproj", "{7B429C52-50CD-4983-821D-6A8ED221F6B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Shipping.Contracts", "BitwiseCommerce.Shipping.Contracts\BitwiseCommerce.Shipping.Contracts.csproj", "{8593E2A4-73C5-47A2-B919-028A0DC7696B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Shipping.InternalMessages", "BitwiseCommerce.Shipping.InternalMessages\BitwiseCommerce.Shipping.InternalMessages.csproj", "{BF000AAA-D11D-48DE-B0FB-21BB159D0B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitwiseCommerce.Shipping.Endpoint", "BitwiseCommerce.Shipping.Endpoint\BitwiseCommerce.Shipping.Endpoint.csproj", "{74491F8A-20FA-4425-9627-30FD8C8D7E72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +45,30 @@ Global
 		{FEA6A35C-9D69-409D-990F-6CE6C0B9ADE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA6A35C-9D69-409D-990F-6CE6C0B9ADE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA6A35C-9D69-409D-990F-6CE6C0B9ADE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1920E538-EEFE-47D7-896E-E934EE3E0190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1920E538-EEFE-47D7-896E-E934EE3E0190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1920E538-EEFE-47D7-896E-E934EE3E0190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1920E538-EEFE-47D7-896E-E934EE3E0190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB2D79A-8A99-40D3-AFD3-77C7FF1253BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB2D79A-8A99-40D3-AFD3-77C7FF1253BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB2D79A-8A99-40D3-AFD3-77C7FF1253BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB2D79A-8A99-40D3-AFD3-77C7FF1253BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B429C52-50CD-4983-821D-6A8ED221F6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B429C52-50CD-4983-821D-6A8ED221F6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B429C52-50CD-4983-821D-6A8ED221F6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B429C52-50CD-4983-821D-6A8ED221F6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8593E2A4-73C5-47A2-B919-028A0DC7696B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8593E2A4-73C5-47A2-B919-028A0DC7696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8593E2A4-73C5-47A2-B919-028A0DC7696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8593E2A4-73C5-47A2-B919-028A0DC7696B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF000AAA-D11D-48DE-B0FB-21BB159D0B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF000AAA-D11D-48DE-B0FB-21BB159D0B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF000AAA-D11D-48DE-B0FB-21BB159D0B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF000AAA-D11D-48DE-B0FB-21BB159D0B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74491F8A-20FA-4425-9627-30FD8C8D7E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74491F8A-20FA-4425-9627-30FD8C8D7E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74491F8A-20FA-4425-9627-30FD8C8D7E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74491F8A-20FA-4425-9627-30FD8C8D7E72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

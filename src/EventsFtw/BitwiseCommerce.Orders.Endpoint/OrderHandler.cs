@@ -14,7 +14,7 @@ namespace BitwiseCommerce.Orders.Endpoint
         {
             //persist order...
             Bus.Publish<IOrderAccepted>(x => x.Id = message.Id);
-            Console.WriteLine("Order {0} published.", message.Id);
+            Console.WriteLine("Order {0} accepted.", message.Id);
         }
     }
 }

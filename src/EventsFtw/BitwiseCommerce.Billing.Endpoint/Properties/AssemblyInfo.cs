@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BitwiseCommerceApi")]
+[assembly: AssemblyTitle("BitwiseCommerce.Billing.Endpoint")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BitwiseCommerceApi")]
+[assembly: AssemblyProduct("BitwiseCommerce.Billing.Endpoint")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("574d44b0-7314-48d0-9260-b3a3e7208c8d")]
+[assembly: Guid("37569682-5a58-4945-a52d-523d66a7eb42")]
 
 // Version information for an assembly consists of the following four values:
 //
