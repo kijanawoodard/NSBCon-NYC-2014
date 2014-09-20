@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BitwiseCommerce.Orders.Handlers\BitwiseCommerce.Orders.Handlers.csproj">
+      <Project>{4f95da9d-e5d3-4173-aff7-67d76419161f}</Project>
+      <Name>BitwiseCommerce.Orders.Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitwiseCommerce.Orders.InternalMessages\BitwiseCommerce.Orders.InternalMessages.csproj">
       <Project>{FEA6A35C-9D69-409D-990F-6CE6C0B9ADE9}</Project>
       <Name>BitwiseCommerce.Orders.InternalMessages</Name>
