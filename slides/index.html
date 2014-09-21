@@ -51,7 +51,7 @@
                             <small><a href="http://kijanawoodard.com">Kijana Woodard</a> / <a href="http://twitter.com/kijanawoodard">@kijanawoodard</a></small>
                         </p>
 					</section>
-
+<!--
                     <section id="transitions">
                         <h2>Transition Styles</h2>
                         <p>
@@ -86,7 +86,7 @@
                                 * Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
                             </small>
                         </p>
-                    </section>
+                    </section>-->
 				</section>
 
                 <section>
@@ -193,7 +193,7 @@ public class OrderController
                             this code hides the complexity<br />
                             error handling?<br/>
                             do what? log?<br />
-                            effectively orchestrating the order process<br />
+                            effectively ORCHESTRATING the order process<br />
                             and the billing service depends on order repository to update order status<br />
                             and the customer service depends on the shipping service to grant free shipping for high value customers<br />
                             violates OCP - bbom takes shape
@@ -235,8 +235,48 @@ public class OrderController
                         </aside>
                     </section>
                     <section>
-                        <h2>Events FTW</h2>
-                        Decouple through events rather than IoC
+                        <h2>Decouple through Events</h2>
+                    </section>
+                    <section>
+                        <h2>Events Implementation</h2>
+
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    public IBus Bus { get; set; }
+
+    public HttpStatusCode Post(ProcessOrder order)
+    {
+        Bus.Send(order);
+        return HttpStatusCode.OK;
+    }
+}
+
+...
+
+public class OrderHandler
+    : IHandleMessages&lt;ProcessOrder>
+{
+    public IBus Bus { get; set; }
+
+    public void Handle(ProcessOrder message)
+    {
+        //save order...
+        Bus.Publish&lt;IOrderAccepted>(x => x.Id = message.Id);
+    }
+}
+                        </code></pre>
+
+                        <aside class="notes">
+                            IoC / DI as a code smell<br />
+                            this code hides the complexity<br />
+                            error handling?<br/>
+                            do what? log?<br />
+                            effectively orchestrating the order process<br />
+                            and the billing service depends on order repository to update order status<br />
+                            and the customer service depends on the shipping service to grant free shipping for high value customers<br />
+                            violates OCP - bbom takes shape
+                        </aside>
                     </section>
                     <section>
                         <h2>Why Events?</h2>
@@ -268,13 +308,28 @@ public class OrderController
 
                 <section>
                     <section>
+                        <h2>What's the problem?</h2>
+                    </section>
+                    <section>
+                        <h2>BBOM Solution</h2>
+                        <figure>
+                            <img src="img/bbom.solution.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Events Solution</h2>
+                        <figure>
+                            <img src="img/events.solution.png" />
+                        </figure>
+                    </section>
+                    <section>
                         <h2>Friction</h2>
 
                         <ul>
                             <li>
                                 More moving parts
                                 <ul>
-                                    <li>Endpoint assemblies</li>
+                                    <li>Endpoints</li>
                                     <li>Message Conventions</li>
                                     <li>Serialization Format</li>
                                 </ul>
@@ -292,26 +347,6 @@ public class OrderController
                             <li>Nuget packages?</li>
                             <li>Custom project templates?</li>
                         </ul>
-                    </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h2>Bus Stop</h2>
-
-                        Show Bus Stop code with conventions as a class
-                        What else can we do with this technique?
-
-                    </section>
-                    <section>
-                        <h2>Separate Endpoints from Handlers</h2>
-
-                        Create an endpoint project and reuse for handlers
-                        Creating endpoints becomes a deployment concern
-                        Show code sample
-                        Create an endpoint for development
-                        How granular?
-
                     </section>
                 </section>
 
@@ -346,6 +381,53 @@ public class OrderController
                         <h2>Service Insight</h2>
 
                         Further automation
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Bus Stop</h2>
+                        <h3><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></h3>
+                        <figure>
+                            <img src="img/bus.stop.solution.png" />
+                        </figure>
+
+                        <aside class="notes">
+                            Project structure<br />
+                            Internal Messages vs Contracts [Events]
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Bus Stop</h2>
+                        <h3><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></h3>
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+namespace BusStop.Config
+{
+    public static class MyConvention
+    {
+        public static Configure MyMessageConventions(this Configure config)
+        {
+            config.DefiningEventsAs(t => t.Namespace != null &&
+                                         t.Namespace.EndsWith(".Contracts"));
+            return config;
+        }
+    }
+}
+                        </code></pre>
+                        <aside class="notes">
+                            What else can we do with this technique?<br />
+                            RUN events solution<br />
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Separate Endpoints from Handlers</h2>
+
+                        Create an endpoint project and reuse for handlers
+                        Creating endpoints becomes a deployment concern
+                        Show code sample
+                        Create an endpoint for development
+                        How granular?
+
                     </section>
                 </section>
 
@@ -674,9 +756,9 @@ function linkify( selector ) {
 				progress: true,
 				history: true,
 				center: true,
-
+                backgroundTransition: 'slide',
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'slide' || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',

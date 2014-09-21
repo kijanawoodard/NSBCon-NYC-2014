@@ -1,4 +1,3 @@
-
 using NServiceBus.RavenDB;
 
 namespace BitwiseCommerce.OPS.Endpoint
@@ -22,7 +21,7 @@ namespace BitwiseCommerce.OPS.Endpoint
                 .InMemorySagaPersister()
                 .UseRavenDBSubscriptionStorage()
                 .InMemoryFaultManagement();
-
+            
             Configure.Serialization.Json();
         }
     }
