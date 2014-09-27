@@ -515,6 +515,8 @@ public class OrderController
                                 </ul>
                             </li>
                         </ul>
+                        <br />
+                        <a href="http://www.devopslive.org/devops-at-gamestop/">Discussion on DevOPS Experience on devopslive.org
                     </section>
                 </section>
 
@@ -553,15 +555,42 @@ namespace BusStop.Config
                             RUN events solution<br />
                         </aside>
                     </section>
+                </section>
+                <section>
                     <section>
                         <h2>Separate Endpoints from Handlers</h2>
+                    </section>
+                    <section>
+                        <h2>Before</h2>
+                        <figure>
+                            <img src="img/events.projects.png" />
+                        </figure>
+                    </section>
 
-                        Create an endpoint project and reuse for handlers
-                        Creating endpoints becomes a deployment concern
-                        Show code sample
-                        Create an endpoint for development
-                        How granular?
-
+                    <section>
+                        <h2>After</h2>
+                        <figure>
+                            <img src="img/combined.projects.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Build Output</h2>
+                        <figure>
+                            <img src="img/combined.files.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Mix and Match</h2>
+                        <figure>
+                            <img src="img/combined.files.all.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Run</h2>
+                        <figure>
+                            <!--<img src="img/combined.files.all.png" />-->
+                        </figure>
+                        NServiceBus.Host.exe -endpointName=orders
                     </section>
                 </section>
 
