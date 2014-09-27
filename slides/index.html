@@ -126,11 +126,12 @@
                     <section>
                         <h2>Slides are on GitHub</h2>
 
-                        <ul>
+                        <a href="https://github.com/kijanawoodard/NSBCon-NYC-2014/">github.com/kijanawoodard/NSBCon-NYC-2014/</a>
+                        <!--<ul>
                             <li>
                                 <a href="https://github.com/kijanawoodard/NSBCon-NYC-2014/">github.com/kijanawoodard/NSBCon-NYC-2014/</a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </section>
                 </section>
                 <section>
@@ -292,11 +293,11 @@ public class OrderHandler
                     <section>
                         <h2>Why Events?</h2>
                         <ul>
+                            <li>Encapsulation</li>
                             <li>Single Responsibility</li>
                             <li>Open Closed Principle</li>
-                            <li>ISP</li>
-                            <li>DIP</li>
-                            <li>Encapsulation</li>
+                            <li>Interface Segregation Principle</li>
+                            <li>Dependency Inversion Principle</li>
                         </ul>
 
                         <aside class="notes">
@@ -334,64 +335,186 @@ public class OrderHandler
                         </figure>
                     </section>
                     <section>
+                        <h2>Events Dev UX</h2>
+                        <figure>
+                            <img src="img/events.runtime.png" />
+                        </figure>
+                    </section>
+                    <section>
                         <h2>Friction</h2>
 
                         <ul>
-                            <li>
-                                More moving parts
-                                <ul>
-                                    <li>Endpoints</li>
-                                    <li>Message Conventions</li>
-                                    <li>Serialization Format</li>
-                                </ul>
-                            </li>
-
-                            <li>Harder to deploy</li>
-                            <li>Decreased Legibility</li>
+                            <li>Message Conventions</li>
+                            <li>Serialization Format</li>
+                            <li>Persistence Configuration</li>
+                            <img src="img/friction.endpointconfig.png" />
                         </ul>
                     </section>
 
+                    <section>
+                        <h2>Harder to Deploy</h2>
+
+                        <ul>
+                            <li>Many Endpoints vs One Application</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Decreased Legibility</h2>
+
+                        <a href="http://www.ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/">ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/</a>
+                    </section>
+
+                    <section>
+                        <h2>Developer's Opinion of BBOM</h2>
+                        <figure>
+                            <img src="img/DependencyGraph.png" />
+                            <figcaption>
+                                -
+                                <a href="http://thedailywtf.com/">
+                                    thedailywtf.com
+                                </a>
+                                <cite>
+                                    <a href="http://thedailywtf.com/Comments/The-Enterprise-Dependency.aspx">
+                                        Comment On The Enterprise Dependency
+                                    </a>
+                                </cite>
+                            </figcaption>
+                        </figure>
+                    </section>
+
+                    <section>
+                        <h2>Executive Summary of BBOM</h2>
+                        <figure>
+                            <img src="img/bbom.executive.summary.png" />
+                        </figure>
+                    </section>
+
+                    <section>
+                        <h2>Executive Summary of Messaging</h2>
+                        <figure>
+                            <img src="img/messaging.executive.summary.png" />
+                        </figure>
+                    </section>
+                </section>
+                <section>
                     <section>
                         <h2>Combat Friction</h2>
 
-                        <ul>
+                        <!--<ul>
                             <li>Nuget packages?</li>
                             <li>Custom project templates?</li>
+                        </ul>-->
+                    </section>
+                    <section>
+                        <h2>Don't Call It a Rewrite</h2>
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    ...
+
+    public OrderController(
+        IOrderRepository orders,
+        IBillingService billing,
+        IShippingService shipping)
+    {
+        _orders = orders;
+        _billing = billing;
+        _shipping = shipping;
+    }
+
+    public HttpStatusCode Post(Order order)
+    {
+        _orders.Save(order.OrderDetails);
+        _billing.Charge(order.BillingDetails);
+        _shipping.Ship(order.ShippingDetails);
+
+        return HttpStatusCode.OK;
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Strangler Pattern</h2>
+
+                        <figure>
+                            <img src="img/Ficus_watkinsiana_on_Syzygium_hemilampra-Iluka.jpg" height="512px" />
+                            <figcaption>
+                                <cite>
+                                    -
+                                    <a href="http://en.wikipedia.org/wiki/Strangler_fig">
+                                        Entry on Strangler Fig
+                                    </a>
+                                    <a href="http://en.wikipedia.org/wiki/Strangler_fig#mediaviewer/File:Ficus_watkinsiana_on_Syzygium_hemilampra-Iluka.jpg">
+                                        Wikipedia
+                                    </a>
+                                </cite>
+                            </figcaption>
+                        </figure>
+                        <a href="http://www.martinfowler.com/bliki/StranglerApplication.html">http://www.martinfowler.com/bliki/StranglerApplication.html</a>
+                    </section>
+                    <section>
+                        <h2>Context</h2>
+
+                        <ul>
+                            <li>Remember that time when we couldn't deploy anything for 6 weeks...</li>
+                            <li>Remember that time when the strategic marketing initiative was held up due to a Shipping upgrade...</li>
                         </ul>
                     </section>
+                    <section>
+                        <h2>Restore some Legibility</h2>
+                        <figure>
+                            <img src="img/messaging.executive.summary.improved.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Have No Illusions</h2>
+                        The Big Ball of Mud will not die easily
+                        <figure>
+                            <img src="img/analytical-mind.jpg" height="512px" />
+                            <figcaption>
+                                <cite>
+                                    -
+                                    <a href="http://advancedlifeskills.com/blog/has-your-analytical-mind-taken-over-your-life/">
+                                    </a>
+                                    <a href="http://advancedlifeskills.com/blog/">
+                                         Advanced Life Skills
+                                    </a>
+                                </cite>
+                            </figcaption>
+                        </figure>
+                    </section>
                 </section>
-
                 <section>
                     <section>
-                        <h2>Automate Automate Automate</h2>
-
-                        Won’t it be difficult to deploy?
-                        Can be as simple as powershell scripts
-                        Won’t it be difficult to maintain?
-                        Use conventions to make life easier
-                        How do we know what’s going on?
-                        Discuss platform tools
-
+                        <h2>Automate <br /><br /> Automate <br /><br /> Automate</h2>
                     </section>
                     <section>
-                        <h2>Payoff</h2>
-
-                        What does this setup afford us?
-                        OPS redeployment of endpoints
-                        Visibility into deployed environment
-                        Repeatability
-                        Faster / Smaller iterations
-                        Confidence
-
-
-                    </section>
-                    <section>
-                        <h2>OPS control</h2>
-                    </section>
-                    <section>
-                        <h2>Service Insight</h2>
-
-                        Further automation
+                        <h2>Don't Do an<br /> "Automation Project"</h2>
+                        Over time, layer in...<br /><br />
+                        <ul>
+                            <li>Build scripts
+                                <ul>
+                                    <li>powershell</li>
+                                    <li>msbuild</li>
+                                    <li>Team City</li>
+                                    <li>Bamboo</li>
+                                </ul>
+                            </li>
+                            <li>Deploy scripts
+                                <ul>
+                                    <li>powershell</li>
+                                    <li>Octopus Deploy</li>
+                                </ul>
+                            </li>
+                            <li>Monitoring and Metrics
+                                <ul>
+                                    <li>Service Insight</li>
+                                    <li>Service Control</li>
+                                    <li>MOM</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </section>
                 </section>
 
@@ -410,7 +533,6 @@ public class OrderHandler
                     </section>
                     <section>
                         <h2>Bus Stop</h2>
-                        <h3><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></h3>
                         <pre><code data-trim class="cs" style="max-height: inherit;">
 namespace BusStop.Config
 {
@@ -425,6 +547,7 @@ namespace BusStop.Config
     }
 }
                         </code></pre>
+                        <h3><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></h3>
                         <aside class="notes">
                             What else can we do with this technique?<br />
                             RUN events solution<br />
@@ -490,10 +613,6 @@ namespace BusStop.Config
                             <li><a href="https://github.com/kijanawoodard/NSBCon-NYC-2014/">slides @ github.com/kijanawoodard/NSBCon-NYC-2014/</a></li>
                             <li><a href="http://kijanawoodard.com">kijanawoodard.com</a></li>
                             <li><a href="https://twitter.com/kijanawoodard">twitter.com/kijanawoodard</a></li>
-
-                            <li><a href="http://www.ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/">ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/</a></li>
-                            <li><a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">Alan Kay on OO</a></li>
-                            <li><a href="https://github.com/andreasohlund/BusStop">github.com/andreasohlund/BusStop</a></li>
                         </ul>
                     </section>
                 </section>
