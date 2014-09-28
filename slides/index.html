@@ -120,6 +120,7 @@
                             <li style="margin-top: 50px;"><a href="https://groups.google.com/forum/#!forum/particularsoftware">particular forum</a></li>
                             <li><a href="https://groups.google.com/forum/#!forum/ravendb">ravendb forum</a></li>
                             <li><a href="https://groups.google.com/forum/#!forum/dddcqrs">ddd/cqrs forum</a></li>
+                            <li><a href="https://groups.google.com/forum/#!forum/hypermedia-web">hypermedia forum</a></li>
                         </ul>
                     </section>
 
@@ -226,9 +227,6 @@ public class OrderController
                             everyone must get approval from SCM committee before _committing_ code<br />
                         </aside>
                     </section>
-                </section>
-
-                <section>
                     <section>
                         <h2>Mediator</h2>
 
@@ -246,6 +244,9 @@ public class OrderController
                             but NSB will act as our mediator<br />
                         </aside>
                     </section>
+                </section>
+
+                <section>
                     <section>
                         <h2>Decouple through Events</h2>
                     </section>
@@ -574,7 +575,13 @@ namespace BusStop.Config
                         </figure>
                     </section>
                     <section>
-                        <h2>Build Output</h2>
+                        <h2>Dev UX</h2>
+                        <figure>
+                            <img src="img/combined.runtime.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Build Artifacts</h2>
                         <figure>
                             <img src="img/combined.files.png" />
                         </figure>
@@ -596,25 +603,152 @@ namespace BusStop.Config
 
                 <section>
                     <section>
-                        <h2>What about Commands?</h2>
-
-                        The normal way – through a web endpoint
-                        If you put the command on the bus?
-                        Async issues in the ui
-                        If you put the command handler in the web project?
-                        Have to duplicate in an endpoint for direct access
-                        More projects
-
+                        <h2>Pushing Forwards</h2>
                     </section>
                     <section>
-                        <h2>What if you proxy?</h2>
-                        Proxy the web requests to rest handlers in the endpoints
-                        Downside?
-                        Latency + fallacies of distributed computing
-                        Are the downsides worth it?
-                        Discuss
-                        Show Code
+                        <h2>A 2nd Look at Events Impl</h2>
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    public IBus Bus { get; set; }
 
+    public HttpStatusCode Post(ProcessOrder order)
+    {
+        Bus.Send(order);
+        return HttpStatusCode.OK;
+    }
+}
+
+...
+
+public class OrderHandler
+    : IHandleMessages&lt;ProcessOrder>
+{
+    public IBus Bus { get; set; }
+
+    public void Handle(ProcessOrder message)
+    {
+        //save order...
+        Bus.Publish&lt;IOrderAccepted>(x => x.Id = message.Id);
+    }
+}
+                        </code></pre>
+                        <aside class="notes">
+                            The normal way – through a web endpoint
+                            If you put the command on the bus?
+                            Async issues in the ui
+                            If you put the command handler in the web project?
+                            Have to duplicate in an endpoint for direct access
+                            More projects
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>One Choice</h2>
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    private IFactory&lt;Duck&lt;Mockable&lt;ProcessOrder>>> _something;
+    public IBus Bus { get; set; }
+
+    public OrderController(IFactory&lt;Duck&lt;Mockable&lt;ProcessOrder>>> something)
+    {
+        _something = something;
+    }
+    public HttpStatusCode Post(ProcessOrder order)
+    {
+        _something.Process(order);
+        return HttpStatusCode.OK;
+    }
+}
+
+...
+
+public class OrderHandler
+    : IHandleMessages&lt;ProcessOrder>
+{
+    private IFactory&lt;Duck&lt;Mockable&lt;ProcessOrder>>> _something;
+    public IBus Bus { get; set; }
+
+    public OrderHandler(IFactory&lt;Duck&lt;Mockable&lt;ProcessOrder>>> something)
+    {
+        _something = something;
+    }
+    public void Handle(ProcessOrder message)
+    {
+        _something.Process(order);
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Exploit Decoupling</h2>
+                        <pre><code data-trim class="cs" style="max-height: inherit;">
+public class OrderController
+{
+    private readonly IHandleMessages&lt;ProcessOrder> _handler;
+    public IBus Bus { get; set; }
+
+    public OrderController(IHandleMessages&lt;ProcessOrder> handler)
+    {
+        _handler = handler;
+    }
+
+    public HttpStatusCode Post(ProcessOrder order)
+    {
+        _handler.Handle(order);
+        return HttpStatusCode.OK;
+    }
+}
+
+...
+
+public class OrderHandler
+    : IHandleMessages&lt;ProcessOrder>
+{
+    public IBus Bus { get; set; }
+
+    public void Handle(ProcessOrder message)
+    {
+        //save order...
+        Bus.Publish&lt;IOrderAccepted>(x => x.Id = message.Id);
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Break Apart the API?</h2>
+                        <pre><code data-trim class="js" style="max-height: inherit;">
+{
+    "submit-order" : "http://api.example.com/orders"
+}
+                        </code></pre>
+                            Later....
+                        <pre><code data-trim class="js" style="max-height: inherit;">
+{
+    "submit-order" : "http://orders.example.com/orders"
+}
+                        </code></pre>
+                        <a href="http://stateless.co/hal_specification.html">HAL - Hypertext Application Language</a>
+
+                        <aside class="notes">
+                            Proxy the web requests to rest handlers in the endpoints<br />
+                            Downside?<br />
+                            Latency + fallacies of distributed computing<br />
+                            Are the downsides worth it?<br />
+
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>What about queries?</h2>
+                        N fanout queries vs 1 for command<br />
+                        Could work with proper circuit breakers<br />
+                        One notable positive - not having to fully configure the api<br />
+                        <aside class="notes">
+                            N queries vs 1 for commands<br />
+                            Could work with proper circuit breakers<br />
+                            One positive - not having to fully configure the single api<br />
+                            <br />
+                        </aside>
                     </section>
                 </section>
                 <section>
@@ -623,10 +757,13 @@ namespace BusStop.Config
                     </section>
 
                     <section>
-                        <h2>What about queries?</h2>
-                        Could proxy work again?
-                        Could ANI help?
+                        <h2>Assembly Neutral<br />Interfaces</h2>
+                        <a href="http://davidfowl.com/assembly-neutral-interfaces/">davidfowl.com/assembly-neutral-interfaces/</a>
+                    </section>
 
+                    <section>
+                        <h2>Roslyn</h2>
+                        What if source files were distrbuted....
                     </section>
                 </section>
                 <section>
