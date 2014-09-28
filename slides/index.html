@@ -496,10 +496,8 @@ public class OrderController
                         <ul>
                             <li>Build scripts
                                 <ul>
-                                    <li>powershell</li>
-                                    <li>msbuild</li>
-                                    <li>Team City</li>
-                                    <li>Bamboo</li>
+                                    <li>powershell / msbuild</li>
+                                    <li>Team City / Bamboo</li>
                                 </ul>
                             </li>
                             <li>Deploy scripts
@@ -510,14 +508,13 @@ public class OrderController
                             </li>
                             <li>Monitoring and Metrics
                                 <ul>
-                                    <li>Service Insight</li>
-                                    <li>Service Control</li>
+                                    <li>Service Insight / Control</li>
                                     <li>MOM</li>
                                 </ul>
                             </li>
                         </ul>
                         <br />
-                        <a href="http://www.devopslive.org/devops-at-gamestop/">Discussion on DevOPS Experience on devopslive.org
+                        <a href="http://www.devopslive.org/devops-at-gamestop/">Discussion on DevOPS Experience on devopslive.org</a>
                     </section>
                 </section>
 
@@ -595,7 +592,7 @@ namespace BusStop.Config
                     <section>
                         <h2>Run</h2>
                         <figure>
-                            <!--<img src="img/combined.files.all.png" />-->
+                            <img src="img/combined.execution.png" height="448" />
                         </figure>
                         NServiceBus.Host.exe -endpointName=orders
                     </section>
@@ -716,6 +713,35 @@ public class OrderHandler
                         </code></pre>
                     </section>
                     <section>
+                        <h2>Run</h2>
+                        <figure>
+                            <img src="img/pubsub.nosub.png" height="448" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Subscriptions</h2>
+                        <figure>
+                            <img src="img/pubsub.raven.replication.png" height="448" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Subscribed</h2>
+                        <figure>
+                            <img src="img/pubsub.replicated.sub.png" height="448" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Direct</h2>
+                        <figure>
+                            <img src="img/pubsub.direct.png" height="448" />
+                        </figure>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Future exploration</h2>
+                    </section>
+                    <section>
                         <h2>Break Apart the API?</h2>
                         <pre><code data-trim class="js" style="max-height: inherit;">
 {
@@ -749,11 +775,6 @@ public class OrderHandler
                             One positive - not having to fully configure the single api<br />
                             <br />
                         </aside>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <h2>Future exploration</h2>
                     </section>
 
                     <section>
