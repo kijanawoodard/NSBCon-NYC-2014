@@ -98,6 +98,7 @@
                     <section>
                         <h2>Background</h2>
                         <ul>
+                            <li>From Dallas, TX</li>
                             <li>Professional develop since 1996</li>
                             <li>.net since 1.0</li>
                             <li>Independent contractor since 2010</li>
@@ -145,12 +146,20 @@
                 <section>
                     <section>
                         <h2>Big Ball of Mud</h2>
-                        Our journey begins
+                        An application which defies modification
                         <aside class="notes">
                             understand the problem space<br />
                             the cure has to be better than the disease<br />
                             too often people iterate to a solution that is worse than the original problem<br />
                         </aside>
+                    </section>
+                    <section>
+                        <h2>BBOM Formal Definition</h2>
+                        <pre><code data-trim class=sql style="max-height: inherit;">
+SELECT currentAssignment
+FROM workHistory
+WHERE originalDeveloper != me
+                        </code></pre>
                     </section>
                     <section>
                         <h2>BBOM Architecure</h2>
@@ -292,7 +301,7 @@ public class OrderHandler
                         </aside>
                     </section>
                     <section>
-                        <h2>Why Events?</h2>
+                        <h2>Bliss</h2>
                         <ul>
                             <li>Encapsulation</li>
                             <li>Single Responsibility</li>
@@ -321,7 +330,7 @@ public class OrderHandler
 
                 <section>
                     <section>
-                        <h2>What's the problem?</h2>
+                        <h2>What's the Problem?</h2>
                     </section>
                     <section>
                         <h2>BBOM Solution</h2>
@@ -556,7 +565,7 @@ namespace BusStop.Config
                 </section>
                 <section>
                     <section>
-                        <h2>Separate Endpoints from Handlers</h2>
+                        <h2>Endpoints vs Handlers</h2>
                     </section>
                     <section>
                         <h2>Before</h2>
