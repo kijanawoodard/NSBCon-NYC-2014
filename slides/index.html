@@ -23,6 +23,8 @@
         <style>
             .reveal h5 {font-size: .6em;}
             .reveal h6 {font-size: .4em;}
+
+            table td { border:1px solid #000; }
         </style>
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
@@ -155,11 +157,25 @@
                     </section>
                     <section>
                         <h2>BBOM Formal Definition</h2>
-                        <pre><code data-trim class=sql style="max-height: inherit;">
+                        <pre style="font-size:1em;"><code data-trim class=sql style="max-height: inherit;">
 SELECT currentAssignment
 FROM workHistory
 WHERE originalDeveloper != me
                         </code></pre>
+                    </section>
+                    <section>
+                        <h2>Defense Mechanisms</h2>
+
+                        <ul>
+                            <li class="fragment">Change control committee</li>
+                            <li class="fragment">Source control committee</li>
+                        </ul>
+
+                        <aside class="notes">
+                            worked at a company that required 17 signatures to deploy anything<br />
+                            the worst is if someone takes that seriously - bottleneck<br />
+                            everyone must get approval from SCM committee before _committing_ code<br />
+                        </aside>
                     </section>
                     <section>
                         <h2>BBOM Architecure</h2>
@@ -222,20 +238,6 @@ public class OrderController
                         </aside>
                     </section>
 
-                    <section>
-                        <h2>Compensations</h2>
-
-                        <ul>
-                            <li class="fragment">Change control committee</li>
-                            <li class="fragment">Source control committee</li>
-                        </ul>
-
-                        <aside class="notes">
-                            worked at a company that required 17 signatures to deploy anything<br />
-                            the worst is if someone takes that seriously - bottleneck<br />
-                            everyone must get approval from SCM committee before _committing_ code<br />
-                        </aside>
-                    </section>
                     <section>
                         <h2>Mediator</h2>
 
@@ -448,7 +450,7 @@ public class OrderController
                         <h2>Strangler Pattern</h2>
 
                         <figure>
-                            <img src="img/Ficus_watkinsiana_on_Syzygium_hemilampra-Iluka.jpg" height="512px" />
+                            <img src="img/Ficus_watkinsiana_on_Syzygium_hemilampra-Iluka.jpg" height="412px" />
                             <figcaption>
                                 <cite>
                                     -
@@ -481,7 +483,7 @@ public class OrderController
                         <h2>Have No Illusions</h2>
                         The Big Ball of Mud will not die easily
                         <figure>
-                            <img src="img/analytical-mind.jpg" height="512px" />
+                            <img src="img/analytical-mind.jpg" height="472px" />
                             <figcaption>
                                 <cite>
                                     -
@@ -498,6 +500,46 @@ public class OrderController
                 <section>
                     <section>
                         <h2>Automate <br /><br /> Automate <br /><br /> Automate</h2>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>Conventions: Web vs Endpoint</li>
+                            <li>Separate configuration repo</li>
+                            <li>Days to Minutes</li>
+                            <li>Smaller, more frequent releases</li>
+                            <li>Confidence</li>
+                            <li>Repeatability</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Configuration</h2>
+                        <table style="width:100%;">
+                            <tr>
+                                <th></th>
+                                <th>db</th>
+                                <th>alert</th>
+                            </tr>
+                            <tr>
+                                <th>local</th>
+                                <td>http://localhost:8080</td>
+                                <td>alerts@devnull.example.com</td>
+                            </tr>
+                            <tr>
+                                <th>dev</th>
+                                <td>http://localhost:8080</td>
+                                <td>alerts@dev.example.com</td>
+                            </tr>
+                            <tr>
+                                <th>qa</th>
+                                <td>http://qa:8080</td>
+                                <td>alerts@qa.example.com</td>
+                            </tr>
+                            <tr>
+                                <th>prod</th>
+                                <td>http://p532977:8080</td>
+                                <td>alerts@example.com</td>
+                            </tr>
+                        </table>
                     </section>
                     <section>
                         <h2>Don't Do an<br /> "Automation Project"</h2>
@@ -518,7 +560,7 @@ public class OrderController
                             <li>Monitoring and Metrics
                                 <ul>
                                     <li>Service Insight / Control</li>
-                                    <li>MOM</li>
+                                    <li>SCOM</li>
                                 </ul>
                             </li>
                         </ul>
@@ -575,7 +617,13 @@ namespace BusStop.Config
                     </section>
 
                     <section>
-                        <h2>After</h2>
+                        <h2>All Together</h2>
+                        <figure>
+                            <img src="img/all.in.one.png" />
+                        </figure>
+                    </section>
+                    <section>
+                        <h2>Combined</h2>
                         <figure>
                             <img src="img/combined.projects.png" />
                         </figure>
@@ -583,7 +631,7 @@ namespace BusStop.Config
                     <section>
                         <h2>Dev UX</h2>
                         <figure>
-                            <img src="img/combined.runtime.png" />
+                            <img src="img/combined.runtime.png" height="800px" />
                         </figure>
                     </section>
                     <section>
@@ -604,6 +652,13 @@ namespace BusStop.Config
                             <img src="img/combined.execution.png" height="448" />
                         </figure>
                         NServiceBus.Host.exe -endpointName=orders
+                    </section>
+                    <section>
+                        <h2>Decouple Dev from OPS</h2>
+                        <ul>
+                            <li>Redeploy without recompile</li>
+                            <li>Tie to Platform Tools</li>
+                        </ul>
                     </section>
                 </section>
 
@@ -760,7 +815,7 @@ public class OrderHandler
                             Later....
                         <pre><code data-trim class="js" style="max-height: inherit;">
 {
-    "submit-order" : "http://orders.example.com/orders"
+    "submit-order" : "http://orders.example.com/"
 }
                         </code></pre>
                         <a href="http://stateless.co/hal_specification.html">HAL - Hypertext Application Language</a>
@@ -775,20 +830,24 @@ public class OrderHandler
                     </section>
                     <section>
                         <h2>What about queries?</h2>
-                        N fanout queries vs 1 for command<br />
-                        Could work with proper circuit breakers<br />
-                        One notable positive - not having to fully configure the api<br />
+                        <ul>
+                            <li>N fanout queries vs 1 for command</li>
+                            <li>Volatile queues</li>
+                            <li>Could work with proper circuit breakers</li>
+                            <li>Easier configuration with mulitple databases</li>
+                        </ul>
                         <aside class="notes">
-                            N queries vs 1 for commands<br />
+                            N fanout queries vs 1 for command<br />
                             Could work with proper circuit breakers<br />
-                            One positive - not having to fully configure the single api<br />
-                            <br />
+                            <a href="">Consumer Driven Interfaces</a><br />
+                            Easier configuration with mulitple databases<br />
                         </aside>
                     </section>
 
                     <section>
                         <h2>Assembly Neutral<br />Interfaces</h2>
-                        <a href="http://davidfowl.com/assembly-neutral-interfaces/">davidfowl.com/assembly-neutral-interfaces/</a>
+                        <a href="http://davidfowl.com/assembly-neutral-interfaces/">davidfowl.com/assembly-neutral-interfaces/</a><br />
+                        <a href="http://martinfowler.com/articles/consumerDrivenContracts.html">Consumer Driven Contracts</a>
                     </section>
 
                     <section>
